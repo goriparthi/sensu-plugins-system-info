@@ -10,6 +10,10 @@ proc_count=`cat /proc/cpuinfo | grep processor | wc -l`
 os=`cat /etc/redhat-release | grep -o '[0-9].[0-9].[0-9]*'`
 uptime=$(uptime | grep -o "[0-9]* days" | awk  ' { print $1 } ')
 
+if [ -z "$uptime" ]; then
+        uptime=0
+fi
+
 echo $host.system-info.operating-system ${os} $spec_time
 echo $host.system-info.total-memory ${mem_gb} $spec_time
 echo $host.system-info.total-processor-count ${proc_count} $spec_time
